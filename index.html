@@ -32,6 +32,9 @@
   }
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -53,51 +56,78 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <a href="https://johnyvino.com" class="sidebar-logo" target="_blank" rel="noopener noreferrer" aria-label="Johny Vino — home">
-        <span class="logo-name">Johny Vino</span>
-        <span class="logo-sub">Interaction Library</span>
+        <svg class="logo-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+          <path d="M4 2l16 10.5-6.5 1.5-3.5 8z" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="logo-text">
+          <span class="logo-name">Johny Vino</span>
+          <span class="logo-sub">Interaction Library</span>
+        </div>
       </a>
     </div>
     <nav class="sidebar-nav" id="sidebarNav" aria-label="Categories"></nav>
+    <footer class="sidebar-footer">
+      <p>The concept, the design, the animation — all crafted over 2 years by <a href="https://johnyvino.com" target="_blank" rel="noopener noreferrer">Johny Vino</a>. For questions or inquiries, contact me <a href="mailto:hello@johnyvino.com">here</a>.</p>
+      <p>All rights reserved 2026</p>
+    </footer>
   </aside>
 
   <!-- Main -->
   <main class="main" id="main-content">
     <header class="page-header">
       <h1>Interaction Library</h1>
-      <p class="page-sub">The concept, the design, the animation all done by<br>Johnyvino over 2 years</p>
+      <p class="page-sub">The concept, the design, the animation — all crafted over two years by Johny Vino across mobile, web and product design.</p>
     </header>
     <div id="sections"></div>
   </main>
 
   <script>
     const categories = [
-      { id: 'featured',  emoji: '⭐', name: 'Featured',  count: 8 },
-      { id: 'books',     emoji: '📚', name: 'Books',     count: 4 },
-      { id: 'business',  emoji: '💼', name: 'Business',  count: 4 },
-      { id: 'calendar',  emoji: '📅', name: 'Calendar',  count: 3 },
-      { id: 'food',      emoji: '🍔', name: 'Food',      count: 4 },
-      { id: 'health',    emoji: '🏥', name: 'Health',    count: 3 },
-      { id: 'housing',   emoji: '🏠', name: 'Housing',   count: 3 },
-      { id: 'map',       emoji: '🗺️', name: 'Map',       count: 3 },
-      { id: 'messages',  emoji: '💬', name: 'Messages',  count: 4 },
-      { id: 'music',     emoji: '🎵', name: 'Music',     count: 4 },
-      { id: 'notes',     emoji: '📝', name: 'Notes',     count: 3 },
-      { id: 'payment',   emoji: '💳', name: 'Payment',   count: 4 },
-      { id: 'photos',    emoji: '📷', name: 'Photos',    count: 3 },
-      { id: 'shopping',  emoji: '🛒', name: 'Shopping',  count: 4 },
-      { id: 'others',    emoji: '🗂️', name: 'Others',    count: 3 },
+      { id: 'featured',  emoji: '⭐', name: 'Featured',  color: '#F59E0B', count: 8 },
+      { id: 'books',     emoji: '📚', name: 'Books',     color: '#10B981', count: 4 },
+      { id: 'business',  emoji: '💼', name: 'Business',  color: '#3B82F6', count: 4 },
+      { id: 'calendar',  emoji: '📅', name: 'Calendar',  color: '#EF4444', count: 3 },
+      { id: 'food',      emoji: '🍔', name: 'Food',      color: '#F97316', count: 4 },
+      { id: 'health',    emoji: '🏥', name: 'Health',    color: '#EC4899', count: 3 },
+      { id: 'housing',   emoji: '🏠', name: 'Housing',   color: '#8B5CF6', count: 3 },
+      { id: 'map',       emoji: '🗺️', name: 'Map',       color: '#06B6D4', count: 3 },
+      { id: 'messages',  emoji: '💬', name: 'Messages',  color: '#6366F1', count: 4 },
+      { id: 'music',     emoji: '🎵', name: 'Music',     color: '#FF4B2B', count: 4 },
+      { id: 'notes',     emoji: '📝', name: 'Notes',     color: '#84CC16', count: 3 },
+      { id: 'payment',   emoji: '💳', name: 'Payment',   color: '#14B8A6', count: 4 },
+      { id: 'photos',    emoji: '📷', name: 'Photos',    color: '#A78BFA', count: 3 },
+      { id: 'shopping',  emoji: '🛒', name: 'Shopping',  color: '#FB7185', count: 4 },
+      { id: 'others',    emoji: '🗂️', name: 'Others',    color: '#94A3B8', count: 3 },
     ];
 
     const gradients = [
-      'linear-gradient(135deg, #0f2027, #2c5364)',
-      'linear-gradient(135deg, #1a0a2e, #5a2090)',
-      'linear-gradient(135deg, #0a2e1a, #0d6b3a)',
-      'linear-gradient(135deg, #2e0a0a, #8a2222)',
-      'linear-gradient(135deg, #0a1a2e, #1a4a8a)',
-      'linear-gradient(135deg, #2e1a0a, #7a4a1a)',
-      'linear-gradient(135deg, #0a2e2e, #1a7a6a)',
-      'linear-gradient(135deg, #1e0a2e, #4a1a6a)',
+      'linear-gradient(160deg, #0a0a0a, #1a1a1a)',
+      'linear-gradient(160deg, #0d0d0d, #161616)',
+      'linear-gradient(160deg, #080808, #131313)',
+      'linear-gradient(160deg, #0c0c0c, #1c1c1c)',
+      'linear-gradient(160deg, #090909, #141414)',
+      'linear-gradient(160deg, #0b0b0b, #181818)',
+      'linear-gradient(160deg, #070707, #121212)',
+      'linear-gradient(160deg, #0e0e0e, #1e1e1e)',
     ];
+
+    const svgIcons = {
+      featured: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+      books:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>`,
+      business: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>`,
+      calendar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+      food:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2"/><line x1="7" y1="2" x2="7" y2="22"/><path d="M21 15V2a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>`,
+      health:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`,
+      housing:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+      map:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+      messages: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>`,
+      music:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`,
+      notes:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`,
+      payment:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>`,
+      photos:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
+      shopping: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>`,
+      others:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>`,
+    };
 
     // Build sidebar
     const nav = document.getElementById('sidebarNav');
@@ -106,7 +136,7 @@
       a.href = `#${cat.id}`;
       a.className = 'nav-item' + (i === 0 ? ' active' : '');
       a.dataset.section = cat.id;
-      a.innerHTML = `<span class="nav-emoji">${cat.emoji}</span><span class="nav-label">${cat.name}</span>`;
+      a.innerHTML = `<span class="cat-icon" aria-hidden="true">${svgIcons[cat.id]}</span><span class="nav-label">${cat.name}</span>`;
       nav.appendChild(a);
     });
 
