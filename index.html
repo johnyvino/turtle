@@ -5,30 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Johny Vino — Interaction Library</title>
-  <meta name="description" content="UI interactions, design concepts and animations by Johny Vino — built over 2 years across mobile, web and product design.">
+  <meta name="description" content="UI interactions, design concepts and animations by Johny Vino — two years of mobile, web and product design thinking, collected in one place.">
   <meta name="author" content="Johny Vino">
+  <meta name="keywords" content="UI design, interaction design, animations, mobile design, product design, Johny Vino">
   <link rel="canonical" href="https://interactions.johnyvino.com/">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#000000">
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://interactions.johnyvino.com/">
+  <meta property="og:site_name" content="Johny Vino">
   <meta property="og:title" content="Johny Vino — Interaction Library">
-  <meta property="og:description" content="UI interactions, design concepts and animations by Johny Vino.">
+  <meta property="og:description" content="UI interactions, design concepts and animations by Johny Vino — two years of mobile, web and product design thinking, collected in one place.">
+  <meta property="og:image" content="https://interactions.johnyvino.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Johny Vino — Interaction Library">
+  <meta property="og:locale" content="en_US">
 
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@johnyvinooo">
+  <meta name="twitter:creator" content="@johnyvinooo">
   <meta name="twitter:title" content="Johny Vino — Interaction Library">
-  <meta name="twitter:description" content="UI interactions, design concepts and animations by Johny Vino.">
+  <meta name="twitter:description" content="UI interactions, design concepts and animations by Johny Vino — two years of mobile, web and product design thinking, collected in one place.">
+  <meta name="twitter:image" content="https://interactions.johnyvino.com/og-image.png">
+  <meta name="twitter:image:alt" content="Johny Vino — Interaction Library">
 
-  <meta name="theme-color" content="#000000">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
+  <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Johny Vino",
+    "@type": "WebSite",
+    "name": "Johny Vino — Interaction Library",
     "url": "https://interactions.johnyvino.com/",
-    "sameAs": ["https://johnyvino.com", "https://www.instagram.com/johnyvinooo/"],
-    "jobTitle": "UI Designer"
+    "description": "UI interactions, design concepts and animations by Johny Vino.",
+    "author": {
+      "@type": "Person",
+      "name": "Johny Vino",
+      "url": "https://johnyvino.com",
+      "jobTitle": "UI Designer",
+      "sameAs": [
+        "https://johnyvino.com",
+        "https://www.instagram.com/johnyvinooo/"
+      ]
+    }
   }
   </script>
 
@@ -53,7 +81,7 @@
   <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
 
   <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar">
+  <aside class="sidebar" id="sidebar" aria-label="Site navigation">
     <div class="sidebar-header">
       <a href="https://johnyvino.com" class="sidebar-logo" target="_blank" rel="noopener noreferrer" aria-label="Johny Vino — home">
         <svg class="logo-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
@@ -64,6 +92,12 @@
           <span class="logo-sub">Interaction Library</span>
         </div>
       </a>
+      <button class="sidebar-close" id="sidebarClose" aria-label="Close navigation">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
     </div>
     <nav class="sidebar-nav" id="sidebarNav" aria-label="Categories"></nav>
     <footer class="sidebar-footer">
@@ -206,29 +240,51 @@
     });
 
     // Mobile sidebar
-    const mobTrigger = document.getElementById('mobTrigger');
-    const overlay    = document.getElementById('sidebarOverlay');
-    const sidebar    = document.getElementById('sidebar');
+    const mobTrigger   = document.getElementById('mobTrigger');
+    const sidebarClose = document.getElementById('sidebarClose');
+    const overlay      = document.getElementById('sidebarOverlay');
+    const sidebar      = document.getElementById('sidebar');
+    let lastFocused    = null;
+
+    function trapFocus(e) {
+      if (e.key !== 'Tab') return;
+      const focusable = [...sidebar.querySelectorAll('a[href], button:not([disabled])')];
+      const first = focusable[0];
+      const last  = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    }
 
     function openSidebar() {
+      lastFocused = document.activeElement;
       sidebar.classList.add('open');
+      sidebar.setAttribute('aria-modal', 'true');
       overlay.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
       mobTrigger.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      document.addEventListener('keydown', trapFocus);
+      sidebarClose?.focus();
     }
 
     function closeSidebar() {
       sidebar.classList.remove('open');
+      sidebar.removeAttribute('aria-modal');
       overlay.classList.remove('open');
       overlay.setAttribute('aria-hidden', 'true');
       mobTrigger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      document.removeEventListener('keydown', trapFocus);
+      lastFocused?.focus();
     }
 
     mobTrigger.addEventListener('click', () =>
       sidebar.classList.contains('open') ? closeSidebar() : openSidebar()
     );
+    sidebarClose?.addEventListener('click', closeSidebar);
     overlay.addEventListener('click', closeSidebar);
 
     document.addEventListener('keydown', e => {
