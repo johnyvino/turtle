@@ -674,42 +674,23 @@ body.sidebar-open .mob-trigger {
 
 .phone-frame {
   position: absolute;
-  top: 16px;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: auto;
-  border-radius: 20px;
-  padding: 6px;
+  inset: 16px 0;
   display: flex;
-
-  /* Frame body — dark titanium with subtle depth gradient */
-  background: linear-gradient(
-    160deg,
-    #3a3a3c 0%,
-    #2c2c2e 30%,
-    #1c1c1e 60%,
-    #141416 100%
-  );
-
-  box-shadow:
-    0 16px 40px rgba(0,0,0,0.2),
-    0 4px 12px rgba(0,0,0,0.12);
+  align-items: center;
+  justify-content: center;
+  background: transparent;
 }
 
 .phone-screen {
-  border-radius: 14px;
+  border-radius: 24px;
   overflow: hidden;
-  background: #000;
+  background: transparent;
   position: relative;
+  box-shadow: inset 0 0 0 2px #D9E0EC, 0 32px 24px -8px rgba(0,0,0,0.28);
   aspect-ratio: 390 / 848;
   height: 100%;
   width: auto;
-
-  /* Screen glass edge — subtle dark recess between glass and frame */
-  box-shadow:
-    inset 0 0 0 0.5px rgba(0,0,0,0.9),
-    inset 0 2px 6px rgba(0,0,0,0.5);
+  max-width: 100%;
 }
 
 .phone-screen::after {
