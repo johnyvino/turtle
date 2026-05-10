@@ -465,11 +465,12 @@
   const lb      = document.getElementById('lightbox');
   const lbVideo = document.getElementById('lightbox-video');
 
-  function openLightbox(src) {
+  function openLightbox(src, title) {
     lbVideo.src = src;
     lbVideo.play().catch(() => {});
     lb.classList.add('open');
     lb.setAttribute('aria-hidden', 'false');
+    if (window.plausible) plausible('Video Open', { props: { title: title || 'Unknown' } });
     lockScroll();
   }
 
@@ -477,6 +478,8 @@
     if (!lb.classList.contains('open')) return;
     lb.classList.remove('open');
     lb.setAttribute('aria-hidden', 'true');
+    lbVideo.style.transform = '';
+    lb.style.opacity = '';
     lbVideo.pause();
     setTimeout(() => { lbVideo.removeAttribute('src'); lbVideo.load(); }, 300);
     unlockScroll();
@@ -484,12 +487,77 @@
 
   lb.addEventListener('click', closeLightbox);
 
-  document.getElementById('sections').addEventListener('click', e => {
+  sectionsEl.addEventListener('click', e => {
     const card = e.target.closest('.card');
     if (!card) return;
     const source = card.querySelector('video source');
-    if (source) openLightbox(source.src);
+    const titleEl = card.querySelector('.card-title');
+    if (source) openLightbox(source.src, titleEl ? titleEl.textContent : '');
   });
+
+  // ── LIGHTBOX SWIPE-DOWN ───────────────────────────────────────────────────
+
+  let lbTouchStartY = 0;
+  let lbTouchDY     = 0;
+  let lbSwiping     = false;
+
+  lb.addEventListener('touchstart', e => {
+    lbTouchStartY = e.touches[0].clientY;
+    lbTouchDY     = 0;
+    lbSwiping     = true;
+  }, { passive: true });
+
+  lb.addEventListener('touchmove', e => {
+    if (!lbSwiping) return;
+    lbTouchDY = e.touches[0].clientY - lbTouchStartY;
+    if (lbTouchDY > 0) {
+      e.preventDefault();
+      const travel = Math.min(lbTouchDY, 240);
+      lbVideo.style.transform = `translateY(${travel * 0.5}px) scale(${1 - (travel / 240) * 0.14})`;
+      lb.style.opacity = String(Math.max(0.3, 1 - lbTouchDY / 360));
+    }
+  }, { passive: false });
+
+  lb.addEventListener('touchend', e => {
+    if (!lbSwiping) return;
+    lbSwiping = false;
+    if (lbTouchDY >= 80) {
+      e.preventDefault();
+      closeLightbox();
+    } else if (lbTouchDY >= 10) {
+      e.preventDefault();
+      lbVideo.style.transform = '';
+      lb.style.opacity = '';
+    }
+  }, { passive: false });
+
+  // ── CARD TAP-HOLD PEEK ────────────────────────────────────────────────────
+
+  let peekTimer = null;
+  let peekCard  = null;
+
+  sectionsEl.addEventListener('touchstart', e => {
+    const card = e.target.closest('.card');
+    if (!card) return;
+    peekTimer = setTimeout(() => {
+      peekCard = card;
+      card.classList.add('card--peeking');
+    }, 500);
+  }, { passive: true });
+
+  sectionsEl.addEventListener('touchmove', () => {
+    clearTimeout(peekTimer);
+    if (peekCard) { peekCard.classList.remove('card--peeking'); peekCard = null; }
+  }, { passive: true });
+
+  sectionsEl.addEventListener('touchend', e => {
+    clearTimeout(peekTimer);
+    if (peekCard) {
+      peekCard.classList.remove('card--peeking');
+      peekCard = null;
+      e.preventDefault();
+    }
+  }, { passive: false });
 
   // ── KEYBOARD ──────────────────────────────────────────────────────────────
 

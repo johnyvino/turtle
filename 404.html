@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | Johny Vino</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Saira+Condensed:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --canvas:       #000000;
+      --hairline:     #262626;
+      --on-dark:      #ffffff;
+      --muted:        #999999;
+      --font-display: 'Saira Condensed', -apple-system, sans-serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+    }
+    body {
+      background: var(--canvas);
+      color: var(--on-dark);
+      font-family: var(--font-mono);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .container { text-align: center; max-width: 480px; }
+    .code {
+      font-family: var(--font-display);
+      font-size: clamp(80px, 20vw, 160px);
+      font-weight: 400;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--on-dark);
+    }
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--hairline);
+      margin: 32px auto;
+    }
+    .message {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 32px;
+      height: 44px;
+      background: transparent;
+      color: var(--on-dark);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--on-dark);
+      border-radius: 9999px;
+      transition: background 0.15s;
+    }
+    .btn:hover { background: rgba(255, 255, 255, 0.06); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p class="code">404</p>
+    <div class="divider"></div>
+    <p class="message">This page doesn't exist.<br>Maybe it moved, or maybe it never did.</p>
+    <a class="btn" href="/">Back to Library</a>
+  </div>
+</body>
+</html>

@@ -40,6 +40,7 @@ body {
 
 body.no-scroll {
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 /* ── SKIP LINK ── */
@@ -459,7 +460,7 @@ body.sidebar-open .mob-trigger {
   border-radius: 24px;
   position: relative;
   aspect-ratio: 4 / 3;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .card-thumb::before {
@@ -485,6 +486,11 @@ body.sidebar-open .mob-trigger {
 
 .card:hover .card-thumb {
   opacity: 0.85;
+}
+
+.card--peeking .card-thumb {
+  transform: scale(1.04);
+  opacity: 0.92;
 }
 
 .card-title {
