@@ -142,6 +142,7 @@ body.no-scroll {
   flex-shrink: 0;
   background: transparent;
   border: 1px solid var(--hairline-str);
+  border-radius: 50%;
   color: var(--muted);
   cursor: pointer;
   align-items: center;
@@ -269,6 +270,7 @@ body.no-scroll {
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   border: 1px solid var(--hairline-str);
+  border-radius: 50%;
   color: white;
   cursor: pointer;
   align-items: center;
@@ -389,6 +391,8 @@ body.sidebar-open .mob-trigger {
   margin-top: 40px;
   flex-wrap: wrap;
 }
+
+.email-short { display: none; }
 
 .btn-action {
   display: inline-flex;
@@ -633,8 +637,21 @@ body.sidebar-open .mob-trigger {
     grid-template-columns: 1fr;
   }
 
-  .header-actions #emailBtn {
-    flex: 1;
+  .header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-actions .btn-action {
+    justify-content: center;
+  }
+
+  .header-actions #emailBtn .email-full {
+    display: none;
+  }
+
+  .header-actions #emailBtn .email-short {
+    display: inline;
   }
 
   .header-meta {
