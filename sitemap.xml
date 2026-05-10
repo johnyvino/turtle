@@ -1,9 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
   <url>
     <loc>https://interactions.johnyvino.com/</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+
+    <!-- Featured interactions -->
+    <video:video>
+      <video:thumbnail_loc>https://interactions.johnyvino.com/og-image.png</video:thumbnail_loc>
+      <video:title>Music Player UI Interaction — Johny Vino</video:title>
+      <video:description>Music player app UI interaction and animation concept by Johny Vino.</video:description>
+      <video:content_loc>https://interactions.johnyvino.com/Assets/Featured/music-player.mp4</video:content_loc>
+      <video:duration>8</video:duration>
+      <video:uploader info="https://johnyvino.com">Johny Vino</video:uploader>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+
+    <video:video>
+      <video:thumbnail_loc>https://interactions.johnyvino.com/og-image.png</video:thumbnail_loc>
+      <video:title>Google Login UI Interaction — Johny Vino</video:title>
+      <video:description>Google login flow UI interaction and animation concept by Johny Vino.</video:description>
+      <video:content_loc>https://interactions.johnyvino.com/Assets/Featured/google-login.mp4</video:content_loc>
+      <video:duration>8</video:duration>
+      <video:uploader info="https://johnyvino.com">Johny Vino</video:uploader>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+
+    <video:video>
+      <video:thumbnail_loc>https://interactions.johnyvino.com/og-image.png</video:thumbnail_loc>
+      <video:title>Split Bill App Interaction — Johny Vino</video:title>
+      <video:description>Split bill calculator tips UI interaction and animation concept by Johny Vino.</video:description>
+      <video:content_loc>https://interactions.johnyvino.com/Assets/Featured/5c6e380b88c954cf05beab78_split-bill-interaction-tips-calculator.mp4</video:content_loc>
+      <video:duration>8</video:duration>
+      <video:uploader info="https://johnyvino.com">Johny Vino</video:uploader>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+
+    <video:video>
+      <video:thumbnail_loc>https://interactions.johnyvino.com/og-image.png</video:thumbnail_loc>
+      <video:title>Checklist App Interaction — Johny Vino</video:title>
+      <video:description>Checklist productivity app UI interaction and animation concept by Johny Vino.</video:description>
+      <video:content_loc>https://interactions.johnyvino.com/Assets/checklist-card.mp4</video:content_loc>
+      <video:duration>9</video:duration>
+      <video:uploader info="https://johnyvino.com">Johny Vino</video:uploader>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+
+    <video:video>
+      <video:thumbnail_loc>https://interactions.johnyvino.com/og-image.png</video:thumbnail_loc>
+      <video:title>Visit Verification Health App — Johny Vino</video:title>
+      <video:description>Visit verification health app UI interaction and animation concept by Johny Vino.</video:description>
+      <video:content_loc>https://interactions.johnyvino.com/Assets/Health_fitness/visit-verification-card.mp4</video:content_loc>
+      <video:duration>12</video:duration>
+      <video:uploader info="https://johnyvino.com">Johny Vino</video:uploader>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+
+    <video:video>
+      <video:thumbnail_loc>https://interactions.johnyvino.com/og-image.png</video:thumbnail_loc>
+      <video:title>BMI Calculator UI Interaction — Johny Vino</video:title>
+      <video:description>BMI calculator health app UI interaction and animation concept by Johny Vino.</video:description>
+      <video:content_loc>https://interactions.johnyvino.com/Assets/Health_fitness/5c77258c760c95f8725b0b92_27-BMI-calculator.mp4</video:content_loc>
+      <video:duration>8</video:duration>
+      <video:uploader info="https://johnyvino.com">Johny Vino</video:uploader>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+
+    <video:video>
+      <video:thumbnail_loc>https://interactions.johnyvino.com/og-image.png</video:thumbnail_loc>
+      <video:title>Add to Cart Interaction — Johny Vino</video:title>
+      <video:description>Add to cart food delivery app UI interaction and animation concept by Johny Vino.</video:description>
+      <video:content_loc>https://interactions.johnyvino.com/Assets/Food/5c6e5199025323f8e9dd628d_add-to-cart-interaction.mp4</video:content_loc>
+      <video:duration>8</video:duration>
+      <video:uploader info="https://johnyvino.com">Johny Vino</video:uploader>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+
+    <video:video>
+      <video:thumbnail_loc>https://interactions.johnyvino.com/og-image.png</video:thumbnail_loc>
+      <video:title>Blockchain Login UI Interaction — Johny Vino</video:title>
+      <video:description>Blockchain finance app login UI interaction and animation concept by Johny Vino.</video:description>
+      <video:content_loc>https://interactions.johnyvino.com/Assets/Finance/5c6e500cbf98b279d5f5e90b_blockchain-login.mp4</video:content_loc>
+      <video:duration>8</video:duration>
+      <video:uploader info="https://johnyvino.com">Johny Vino</video:uploader>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+
+    <image:image>
+      <image:loc>https://interactions.johnyvino.com/og-image.png</image:loc>
+      <image:title>Johny Vino — UI Interaction Library</image:title>
+      <image:caption>100+ mobile app UI interactions, animations and UX concepts by Johny Vino</image:caption>
+    </image:image>
   </url>
+
 </urlset>

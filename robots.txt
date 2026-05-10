@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /phone-playground.html
+
+# Allow video assets to be indexed
+Allow: /Assets/
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
 
 Sitemap: https://interactions.johnyvino.com/sitemap.xml
