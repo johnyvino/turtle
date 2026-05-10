@@ -658,7 +658,9 @@ body.sidebar-open .mob-trigger {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 16px;
-    margin-top: 32px;
+    margin-top: 0;
+    margin-bottom: 28px;
+    order: -1;
   }
 
   .header-meta-item {
@@ -666,6 +668,7 @@ body.sidebar-open .mob-trigger {
   }
 
   .page-header {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 }
