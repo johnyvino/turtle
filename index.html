@@ -63,7 +63,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?t=20260509231000">
 </head>
 <body>
 
@@ -83,15 +83,19 @@
   <!-- Sidebar -->
   <aside class="sidebar" id="sidebar" aria-label="Site navigation">
     <div class="sidebar-header">
-      <a href="https://johnyvino.com" class="sidebar-logo" target="_blank" rel="noopener noreferrer" aria-label="Johny Vino — home">
-        <svg class="logo-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
-          <path d="M4 2l16 10.5-6.5 1.5-3.5 8z" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <button class="sidebar-logo" id="logoScrollTop" aria-label="Scroll to top">
+        <div class="logo-icon" aria-hidden="true">
+          <svg id="logoMorphSvg" viewBox="0 0 24 24" width="22" height="22" fill="none">
+            <path id="logoMorphPath"
+              d="M5 1L5 18L9 14L12 21L15 19.5L11.5 13L18 13Z"
+              stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
         <div class="logo-text">
           <span class="logo-name">Johny Vino</span>
           <span class="logo-sub">Interaction Library</span>
         </div>
-      </a>
+      </button>
       <button class="sidebar-close" id="sidebarClose" aria-label="Close navigation">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -109,19 +113,30 @@
   <!-- Main -->
   <main class="main" id="main-content">
     <header class="page-header">
-      <p class="page-eyebrow">2016 — 2018</p>
-      <h1>Johny Vino Interaction Library</h1>
-      <p class="page-sub">To hone my quick-fire prototyping skills, I designed and animated an app every day for 2 years. Each piece is a self-contained exploration — a concept, a flow, an interaction — built from scratch inside 24 hours.</p>
-      <div class="header-actions">
-        <button class="btn-action" id="emailBtn" aria-label="Copy email address">
-          hello@johnyvino.com
-        </button>
-        <a class="btn-action btn-action--outline" href="https://johnyvino.com" target="_blank" rel="noopener noreferrer">
-          Portfolio
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" style="margin-left:8px;flex-shrink:0;">
-            <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
+      <div class="header-content">
+        <h1>Johny Vino<br>Interaction Library</h1>
+        <p class="page-sub">To hone my quick-fire prototyping skills, I designed and animated an app every day for 2 years (2016 — 2018). Each piece is a self-contained exploration — a concept, a flow, an interaction — built from scratch inside 24 hours.</p>
+        <div class="header-actions">
+          <button class="btn-action" id="emailBtn" aria-label="Copy email address">
+            hello@johnyvino.com
+          </button>
+          <a class="btn-action btn-action--outline" href="https://johnyvino.com" target="_blank" rel="noopener noreferrer">
+            Portfolio
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" style="margin-left:8px;flex-shrink:0;">
+              <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="header-meta" aria-label="Site stats">
+        <div class="header-meta-item">
+          <span class="meta-label">Hello</span>
+          <span class="meta-value" id="greetingDisplay">—</span>
+        </div>
+        <div class="header-meta-item">
+          <span class="meta-label">You are Visitor</span>
+          <span class="meta-value" id="visitorCount">—</span>
+        </div>
       </div>
     </header>
     <div id="sections"></div>
@@ -141,7 +156,6 @@
         color: '#F59E0B',
         files: [
           'Assets/Featured/5841ea_022e8d123ad44fb581740d70755deff9~mv2.mp4',
-          'Assets/Featured/5841ea_3545b619ddd14a848f768be14766666d~mv2.mp4',
           'Assets/Featured/5841ea_b9b26202264143e7bc6a2f122b5a6867~mv2.mp4',
           'Assets/Featured/5c6e380b88c954cf05beab78_split-bill-interaction-tips-calculator.mp4',
           'Assets/Featured/5c6e494b88c95407b3bed179_chat-bot.mp4',
@@ -150,8 +164,8 @@
           'Assets/Featured/5c6e494f1c5eee14e8e7ce15_google3.mp4',
           'Assets/Featured/5c6e4951025323fe73dd5584_meet-2.mp4',
           'Assets/Featured/5c6e495288c9541e70bed182_mnc.mp4',
-          'Assets/Featured/5c6e495388c954897abed183_hair-saloon.mp4',
           'Assets/Featured/5c6e49549de5966dcdb46323_invite-bitcoin.mp4',
+          'Assets/Featured/5c6e495388c954897abed183_hair-saloon.mp4',
           'Assets/Featured/5c6e4955e965e254b2167efe_saloon-multiple.mp4',
         ]
       },
@@ -310,6 +324,7 @@
           'Assets/Utilities/5c6e53190253231082dd6382_wages.mp4',
           'Assets/Utilities/5c6e531a9de596970db4704a_wash.mp4',
           'Assets/Utilities/5c772584ef196871c6bdaa68_2-aircondition1.mp4',
+          'Assets/demo-phone.mp4',
         ]
       },
     ];
@@ -327,18 +342,25 @@
       productivity: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>`,
     };
 
-    // Build sidebar
+    // Build sidebar nav
     const nav = document.getElementById('sidebarNav');
+
     categories.forEach((cat, i) => {
       const a = document.createElement('a');
       a.href = `#${cat.id}`;
       a.className = 'nav-item' + (i === 0 ? ' active' : '');
       a.dataset.section = cat.id;
-      a.innerHTML = `<span class="cat-icon" aria-hidden="true">${svgIcons[cat.id]}</span><span class="nav-label">${cat.name}</span>`;
+      a.innerHTML = `<span class="cat-icon" data-cat="${cat.id}" aria-hidden="true">${svgIcons[cat.id]}</span><span class="nav-label">${cat.name}</span>`;
       nav.appendChild(a);
     });
 
     const titleOverrides = {
+      // Hash-only files with known content
+      '022e8d123ad44fb581740d70755deff9~mv2': 'Music Player',
+      'b9b26202264143e7bc6a2f122b5a6867~mv2': 'Google Login',
+      '5b0e8d0053a44942a97321436d910536~mv2': 'Onboarding',
+      'd452566dff19496c97a5855a65c546cd~mv2': 'Business Size',
+      'demo-phone':                            'Checklist',
       // Spelling fixes
       'caleder':                                         'Calendar',
       'screeening':                                      'Screening',
@@ -419,9 +441,21 @@
       cat.files.forEach((file, i) => {
         const t = titleFromPath(file);
         const title = t || `${cat.name} ${String(i + 1).padStart(2, '0')}`;
+        const isPhone = file.includes('demo-phone');
         const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
+        card.className = isPhone ? 'card card--phone' : 'card';
+        card.innerHTML = isPhone ? `
+          <div class="card-thumb loaded">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <video loop muted playsinline preload="none">
+                  <source src="${encodeURI(file)}" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+          ${title ? `<p class="card-title">${title}</p>` : ''}
+        ` : `
           <div class="card-thumb">
             <video loop muted playsinline preload="none">
               <source src="${encodeURI(file)}" type="video/mp4">
@@ -448,7 +482,12 @@
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.card-thumb video').forEach(v => videoObserver.observe(v));
+    document.querySelectorAll('.card-thumb video').forEach(v => {
+      videoObserver.observe(v);
+      v.addEventListener('canplay', () => {
+        v.closest('.card-thumb').classList.add('loaded');
+      });
+    });
 
     // Scroll spy
     const navItems = document.querySelectorAll('.nav-item');
@@ -485,6 +524,8 @@
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           history.pushState(null, '', `#${link.dataset.section}`);
           scrollTimer = setTimeout(() => { scrollingFromClick = false; }, 1000);
+          // Re-scroll after videos have loaded and shifted layout
+          setTimeout(() => { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 600);
         }
         closeSidebar();
       });
@@ -513,6 +554,36 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    // Time-based greeting from visitor's local timezone
+    const greetingEl = document.getElementById('greetingDisplay');
+    const hour = new Date().getHours();
+    const greeting = hour >= 5  && hour < 12 ? 'Good Morning'
+                   : hour >= 12 && hour < 17 ? 'Good Afternoon'
+                   : 'Good Evening';
+    greetingEl.textContent = greeting;
+
+    // Visitor number — increments by 1 on every page load
+    const visitorEl = document.getElementById('visitorCount');
+    const STORE_KEY = 'jv_visitor_num_v2';
+    let myNumber    = parseInt(localStorage.getItem(STORE_KEY) || '0');
+    if (myNumber < 1000) {
+      myNumber = 54200 + Math.floor(Math.random() * 30) + 1;
+    } else {
+      myNumber += 1;
+    }
+    localStorage.setItem(STORE_KEY, myNumber);
+    // Count up animation from 0 to myNumber
+    const duration = 1800;
+    const start    = performance.now();
+    function countUp(now) {
+      const t       = Math.min((now - start) / duration, 1);
+      const eased   = 1 - Math.pow(1 - t, 3);
+      const current = Math.round(eased * myNumber);
+      visitorEl.textContent = '#' + current.toLocaleString('en-US');
+      if (t < 1) requestAnimationFrame(countUp);
+    }
+    requestAnimationFrame(countUp);
+
     // Mobile sidebar
     const mobTrigger   = document.getElementById('mobTrigger');
     const sidebarClose = document.getElementById('sidebarClose');
@@ -539,6 +610,7 @@
       overlay.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
       mobTrigger.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('sidebar-open');
       document.body.style.overflow = 'hidden';
       document.addEventListener('keydown', trapFocus);
       sidebarClose?.focus();
@@ -550,6 +622,7 @@
       overlay.classList.remove('open');
       overlay.setAttribute('aria-hidden', 'true');
       mobTrigger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('sidebar-open');
       document.body.style.overflow = '';
       document.removeEventListener('keydown', trapFocus);
       lastFocused?.focus();
@@ -561,10 +634,76 @@
     sidebarClose?.addEventListener('click', closeSidebar);
     overlay.addEventListener('click', closeSidebar);
 
+    const logoBtn = document.getElementById('logoScrollTop');
+    logoBtn?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    logoBtn?.addEventListener('mouseenter', () => {
+      anime({ targets: logoBtn, scale: 1.07, duration: 700, easing: 'easeOutElastic(1, 0.45)' });
+    });
+    logoBtn?.addEventListener('mouseleave', () => {
+      anime({ targets: logoBtn, scale: 1, duration: 500, easing: 'easeOutQuart' });
+    });
+
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && sidebar.classList.contains('open')) closeSidebar();
     });
   </script>
+
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://unpkg.com/flubber@0.4.2/build/flubber.min.js"></script>
+  <script>
+    (function () {
+      const el = document.getElementById('logoMorphPath');
+      if (!el) return;
+
+      const shapes = [
+        'M5 1L5 18L9 14L12 21L15 19.5L11.5 13L18 13Z',
+        'M5 3L19 12L5 21Z',
+        'M13 1L3 14L12 14L10 23L21 10L12 10Z',
+        'M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5Z',
+      ];
+
+      const HOLD  = 1300;
+      const MORPH = 700;
+
+      let idx        = 0;
+      let phase      = 'hold';
+      let phaseStart = null;
+      let interp     = null;
+
+      function easeInOut(t) {
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      }
+
+      function tick(now) {
+        if (phaseStart === null) phaseStart = now;
+        const elapsed = now - phaseStart;
+
+        if (phase === 'hold') {
+          if (elapsed >= HOLD) {
+            phase      = 'morph';
+            phaseStart = now;
+            const next = (idx + 1) % shapes.length;
+            interp     = flubber.interpolate(shapes[idx], shapes[next], { maxSegmentLength: 4 });
+          }
+        } else {
+          const t = Math.min(elapsed / MORPH, 1);
+          el.setAttribute('d', interp(easeInOut(t)));
+          if (t >= 1) {
+            idx        = (idx + 1) % shapes.length;
+            phase      = 'hold';
+            phaseStart = now;
+          }
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    })();
+  </script>
+
 
 </body>
 </html>
