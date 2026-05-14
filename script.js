@@ -282,13 +282,15 @@
     cat.files.forEach((file, i) => {
       const t = titleFromPath(file);
       const title = t || `${cat.name} ${String(i + 1).padStart(2, '0')}`;
+      const poster = file.replace(/\.mp4$/, '.jpg');
       const card = document.createElement('div');
       card.className = 'card';
       card.innerHTML =
         `<div class="card-thumb">` +
-        `<video loop muted playsinline preload="none">` +
-        `<source src="${encodeURI(file)}" type="video/mp4">` +
-        `</video></div>` +
+        `<video loop muted playsinline preload="none" ` +
+        `poster="${encodeURI(poster)}" ` +
+        `data-src="${encodeURI(file)}"></video>` +
+        `</div>` +
         (title ? `<p class="card-title">${title}</p>` : '');
       grid.appendChild(card);
     });
@@ -301,14 +303,18 @@
 
   const videoObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.play().catch(() => {});
-      else entry.target.pause();
+      const v = entry.target;
+      if (entry.isIntersecting) {
+        if (!v.src && v.dataset.src) v.src = v.dataset.src;
+        v.play().catch(() => {});
+      } else {
+        v.pause();
+      }
     });
-  }, { threshold: 0.1 });
+  }, { rootMargin: '200px 0px', threshold: 0.25 });
 
   document.querySelectorAll('.card-thumb video').forEach(v => {
     videoObserver.observe(v);
-    v.addEventListener('canplay', () => v.closest('.card-thumb').classList.add('loaded'));
   });
 
   // ── SCROLL SPY ────────────────────────────────────────────────────────────
@@ -453,12 +459,6 @@
 
   const logoBtn = document.getElementById('logoScrollTop');
   logoBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  logoBtn?.addEventListener('mouseenter', () =>
-    anime({ targets: logoBtn, scale: 1.07, duration: 700, easing: 'easeOutElastic(1, 0.45)' })
-  );
-  logoBtn?.addEventListener('mouseleave', () =>
-    anime({ targets: logoBtn, scale: 1, duration: 500, easing: 'easeOutQuart' })
-  );
 
   // ── LIGHTBOX ──────────────────────────────────────────────────────────────
 
@@ -490,9 +490,10 @@
   sectionsEl.addEventListener('click', e => {
     const card = e.target.closest('.card');
     if (!card) return;
-    const source = card.querySelector('video source');
+    const video = card.querySelector('video');
     const titleEl = card.querySelector('.card-title');
-    if (source) openLightbox(source.src, titleEl ? titleEl.textContent : '');
+    const src = video?.dataset.src || video?.currentSrc || video?.src;
+    if (src) openLightbox(src, titleEl ? titleEl.textContent : '');
   });
 
   // ── LIGHTBOX SWIPE-DOWN ───────────────────────────────────────────────────
@@ -577,29 +578,15 @@
       'M13 1L3 14L12 14L10 23L21 10L12 10Z',
       'M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5Z',
     ];
-    const HOLD = 1300, MORPH = 700;
-    let idx = 0, phase = 'hold', phaseStart = null, interp = null;
-
-    function easeInOut(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
-
-    function tick(now) {
-      if (phaseStart === null) phaseStart = now;
-      const elapsed = now - phaseStart;
-      if (phase === 'hold') {
-        if (elapsed >= HOLD) {
-          phase = 'morph';
-          phaseStart = now;
-          interp = flubber.interpolate(shapes[idx], shapes[(idx + 1) % shapes.length], { maxSegmentLength: 4 });
-        }
-      } else {
-        const t = Math.min(elapsed / MORPH, 1);
-        morphEl.setAttribute('d', interp(easeInOut(t)));
-        if (t >= 1) { idx = (idx + 1) % shapes.length; phase = 'hold'; phaseStart = now; }
-      }
-      requestAnimationFrame(tick);
-    }
-
-    requestAnimationFrame(tick);
+    let idx = 0;
+    setInterval(() => {
+      idx = (idx + 1) % shapes.length;
+      morphEl.style.opacity = '0';
+      setTimeout(() => {
+        morphEl.setAttribute('d', shapes[idx]);
+        morphEl.style.opacity = '1';
+      }, 200);
+    }, 2000);
   }
 
 })();
