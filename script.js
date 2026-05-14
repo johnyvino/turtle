@@ -355,11 +355,11 @@
   const emailBtn = document.getElementById('emailBtn');
   emailBtn.addEventListener('click', () => {
     navigator.clipboard.writeText('hi@johnyvino.com').then(() => {
-      const orig = emailBtn.textContent;
+      const orig = emailBtn.innerHTML;
       emailBtn.textContent = 'Copied to clipboard';
       emailBtn.classList.add('btn-action--copied');
       setTimeout(() => {
-        emailBtn.textContent = orig;
+        emailBtn.innerHTML = orig;
         emailBtn.classList.remove('btn-action--copied');
       }, 2000);
     });
