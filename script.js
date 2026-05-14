@@ -354,7 +354,7 @@
 
   const emailBtn = document.getElementById('emailBtn');
   emailBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText('hello@johnyvino.com').then(() => {
+    navigator.clipboard.writeText('hi@johnyvino.com').then(() => {
       const orig = emailBtn.textContent;
       emailBtn.textContent = 'Copied to clipboard';
       emailBtn.classList.add('btn-action--copied');
