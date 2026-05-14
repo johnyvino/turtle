@@ -290,6 +290,7 @@
         `<video loop muted playsinline preload="none" ` +
         `poster="${encodeURI(poster)}" ` +
         `data-src="${encodeURI(file)}"></video>` +
+        `<div class="loading-bar" aria-hidden="true"></div>` +
         `</div>` +
         (title ? `<p class="card-title">${title}</p>` : '');
       grid.appendChild(card);
@@ -299,23 +300,87 @@
     sectionsEl.appendChild(section);
   });
 
-  // ── LAZY VIDEO PLAY ───────────────────────────────────────────────────────
+  // ── CONNECTION AWARENESS ──────────────────────────────────────────────────
 
-  const videoObserver = new IntersectionObserver(entries => {
+  const conn = navigator.connection || navigator.webkitConnection || navigator.mozConnection;
+  const lowBandwidth = !!(conn && (conn.saveData || /^(2g|slow-2g)$/.test(conn.effectiveType || '')));
+
+  // ── VIDEO LOAD QUEUE ──────────────────────────────────────────────────────
+  // Cap concurrent downloads so the browser doesn't choke trying to fetch
+  // every visible video at once over GitHub Pages' HTTP/1.1 connection limit.
+
+  const MAX_CONCURRENT = 3;
+  let activeLoads = 0;
+  const loadQueue = [];
+
+  function pumpQueue() {
+    while (activeLoads < MAX_CONCURRENT && loadQueue.length) {
+      const v = loadQueue.shift();
+      if (v.src) continue;
+      activeLoads++;
+      v.parentElement.classList.add('is-loading');
+      const done = () => {
+        activeLoads--;
+        v.parentElement.classList.remove('is-loading');
+        if (v.dataset.inView === '1') v.play().catch(() => {});
+        pumpQueue();
+      };
+      v.addEventListener('loadeddata', done, { once: true });
+      v.addEventListener('error', done, { once: true });
+      v.src = v.dataset.src;
+    }
+  }
+
+  function enqueueLoad(v, priority) {
+    if (v.src || loadQueue.includes(v)) return;
+    if (priority) loadQueue.unshift(v);
+    else loadQueue.push(v);
+    pumpQueue();
+  }
+
+  function dequeueLoad(v) {
+    const idx = loadQueue.indexOf(v);
+    if (idx > -1) loadQueue.splice(idx, 1);
+  }
+
+  // ── LAZY LOAD + PLAY ──────────────────────────────────────────────────────
+  // Two observers separate "should be loading" from "should be playing":
+  // load 300px before the viewport, but only play when actually visible.
+
+  const loadObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       const v = entry.target;
       if (entry.isIntersecting) {
-        if (!v.src && v.dataset.src) v.src = v.dataset.src;
-        v.play().catch(() => {});
+        if (!lowBandwidth) enqueueLoad(v, true);
       } else {
-        v.pause();
+        dequeueLoad(v);
       }
     });
-  }, { rootMargin: '200px 0px', threshold: 0.25 });
+  }, { rootMargin: '300px 0px', threshold: 0.01 });
+
+  const playObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const v = entry.target;
+      v.dataset.inView = entry.isIntersecting ? '1' : '0';
+      if (entry.isIntersecting) v.play().catch(() => {});
+      else v.pause();
+    });
+  }, { rootMargin: '0px', threshold: 0.25 });
 
   document.querySelectorAll('.card-thumb video').forEach(v => {
-    videoObserver.observe(v);
+    loadObserver.observe(v);
+    playObserver.observe(v);
   });
+
+  // Warm up the first section so the top of the page is ready before any scroll.
+  if (!lowBandwidth) {
+    const firstSection = document.querySelector('.category-section');
+    if (firstSection) {
+      firstSection.querySelectorAll('.card-thumb video').forEach((v, i) => {
+        if (i < 4) enqueueLoad(v, false);
+      });
+    }
+  }
 
   // ── SCROLL SPY ────────────────────────────────────────────────────────────
 
