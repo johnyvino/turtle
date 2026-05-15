@@ -309,6 +309,7 @@
 
   document.querySelectorAll('.card-thumb video').forEach(v => {
     videoObserver.observe(v);
+    v.addEventListener('canplay', () => v.closest('.card-thumb').classList.add('loaded'));
   });
 
   // ── SCROLL SPY ────────────────────────────────────────────────────────────
