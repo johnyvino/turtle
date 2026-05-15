@@ -286,8 +286,9 @@
       card.className = 'card';
       card.innerHTML =
         `<div class="card-thumb">` +
-        `<video loop muted playsinline preload="none" ` +
-        `data-src="${encodeURI(file)}"></video>` +
+        `<video loop muted playsinline preload="none">` +
+        `<source src="${encodeURI(file)}" type="video/mp4">` +
+        `</video>` +
         `</div>` +
         (title ? `<p class="card-title">${title}</p>` : '');
       grid.appendChild(card);
@@ -301,18 +302,10 @@
 
   const videoObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      const v = entry.target;
-      if (entry.isIntersecting) {
-        if (!v.src && v.dataset.src) {
-          v.src = v.dataset.src;
-          v.load();
-        }
-        v.play().catch(() => {});
-      } else {
-        v.pause();
-      }
+      if (entry.isIntersecting) entry.target.play().catch(() => {});
+      else entry.target.pause();
     });
-  }, { rootMargin: '200px 0px', threshold: 0.25 });
+  }, { threshold: 0.1 });
 
   document.querySelectorAll('.card-thumb video').forEach(v => {
     videoObserver.observe(v);
@@ -493,7 +486,7 @@
     if (!card) return;
     const video = card.querySelector('video');
     const titleEl = card.querySelector('.card-title');
-    const src = video?.dataset.src || video?.currentSrc || video?.src;
+    const src = video?.currentSrc || video?.querySelector('source')?.src;
     if (src) openLightbox(src, titleEl ? titleEl.textContent : '');
   });
 
